@@ -4,9 +4,7 @@ const { createCustomError } = require("../errors/custom-error");
 
 const getAllTasks = asyncWrapper(async (req, res) => {
   const tasks = await Task.find({});
-  res
-    .status(201)
-    .json({ success: true, data: { tasks, nbHits: tasks.length } });
+  res.status(201).json({ tasks });
 });
 
 const createTask = asyncWrapper(async (req, res) => {
