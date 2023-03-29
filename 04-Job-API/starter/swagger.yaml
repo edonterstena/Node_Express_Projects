@@ -1,0 +1,271 @@
+openapi: 3.0.0
+info:
+  title: JOBs_API
+  description: ""
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://jobs-api-vxjc.onrender.com/api/v1
+    variables:
+      _.PROD_URL:
+        default: DefaultParameterValue
+  - url: https://jobs-api-vxjc.onrender.com/api/v1
+    variables:
+      _.PROD_URL:
+        default: DefaultParameterValue
+  - url: https://jobs-api-vxjc.onrender.com/api/v1
+    variables:
+      _.PROD_URL:
+        default: DefaultParameterValue
+paths:
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    delete:
+      tags:
+        - Jobs
+      summary: delete job
+      description: ""
+      operationId: deletejob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+    patch:
+      tags:
+        - Jobs
+      summary: update job
+      description: ""
+      operationId: updatejob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/updatejobRequest"
+                - example:
+                    company: Meta
+                    position: front-end
+            example:
+              company: Meta
+              position: front-end
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+    get:
+      tags:
+        - Jobs
+      summary: get single job
+      description: ""
+      operationId: getsinglejob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /jobs/:
+    get:
+      tags:
+        - Jobs
+      summary: get all jobs
+      description: ""
+      operationId: getalljobs
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /jobs:
+    post:
+      tags:
+        - Jobs
+      summary: create job
+      description: ""
+      operationId: createjob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/createjobRequest"
+                - example:
+                    company: random
+                    position: full-stack
+            example:
+              company: random
+              position: full-stack
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /auth/login:
+    post:
+      tags:
+        - AUTH
+      summary: Login
+      description: ""
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/LoginRequest"
+                - example:
+                    email: random@gmail.com
+                    password: random
+            example:
+              email: random@gmail.com
+              password: random
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+        - AUTH
+      summary: Register
+      description: ""
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/RegisterRequest"
+                - example:
+                    name: random
+                    email: random@gmail.com
+                    password: random
+            example:
+              name: random
+              email: random@gmail.com
+              password: random
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    updatejobRequest:
+      title: updatejobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Meta
+        position: front-end
+    createjobRequest:
+      title: createjobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: random
+        position: full-stack
+    LoginRequest:
+      title: LoginRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: random@gmail.com
+        password: test123
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: test3
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: AUTH
+    description: ""
